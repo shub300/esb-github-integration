@@ -1,0 +1,21 @@
+--------------------------14/07/2021----------------------------
+@sourabh
+
+INSERT INTO `platform_lookup` (`id`, `platform_id`, `platform_name`, `platform_image`, `auth_endpoint`, `status`) VALUES (NULL, 'skuvault', 'skuvault', NULL,NULL, '1'), (NULL, 'wayfair', 'wayfair', NULL, 'InitiateWFAuth', '1');
+
+INSERT INTO `platform_integrations` (`id`, `source_platform_id`, `destination_platform_id`, `user_id`, `description`, `status`, `created_at`) VALUES (NULL, 'skuvault', 'wayfair', '0', NULL, '1', current_timestamp());
+UPDATE `platform_lookup` SET `platform_image` = '/public/esb_asset/brand_icons/wayfair.jpeg' WHERE `platform_lookup`.`id` = 5;
+
+UPDATE `platform_lookup` SET `platform_image` = '/public/esb_asset/brand_icons/skuvault.png' WHERE `platform_lookup`.`id` = 4;
+
+--------------------------15/07/2021----------------------------
+ALTER TABLE `user_integrations` ADD `flow_name` VARCHAR(255) NULL AFTER `user_id`;
+
+--------------------------15/07/2021----------------------------
+ALTER TABLE `platform_warehouse` ADD `user_integration_id` INT NOT NULL DEFAULT '0' AFTER `user_id`;
+ALTER TABLE `platform_warehouse` CHANGE `warehouse_id` `api_warehouse_id` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;
+ALTER TABLE `platform_warehouse` CHANGE `warehouse_code` `api_warehouse_code` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;
+
+
+
+INSERT INTO `platform_objects` (`id`, `name`, `description`, `linked_with`, `object_type`, `status`) VALUES (NULL, 'accept_order', 'accept_order', NULL, 'mapping_rule', '1');
